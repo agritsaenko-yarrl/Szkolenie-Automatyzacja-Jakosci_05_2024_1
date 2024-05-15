@@ -1,0 +1,22 @@
+name: Cypress Full Suite Tests
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Install deps
+      run: npm install
+
+    - name: Build Cypress image
+      run: docker build -t cypress-image -f .Dockerfile .
+
+    - name: Run Bash-script run_tests
+      run: bash run_tests.sh
