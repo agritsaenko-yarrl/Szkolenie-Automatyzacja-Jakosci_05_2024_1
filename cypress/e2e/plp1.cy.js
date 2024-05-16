@@ -10,7 +10,7 @@ describe('plp1', () => {
     cy.wait(3000);
 
     cy.get('[data-test="inventory-item"]')
-      .should('have.length', 6)
+      .should('have.length', 10)
       .each((listItem) => {
         cy.wrap(listItem).within(() => {
           cy.get('[data-test="inventory-item-name"]').should('be.visible');
