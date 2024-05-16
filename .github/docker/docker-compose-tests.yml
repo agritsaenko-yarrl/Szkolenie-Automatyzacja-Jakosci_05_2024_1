@@ -1,0 +1,15 @@
+services:
+  cypress-plp:
+    image: cypress-image
+    build:
+      context: ../../
+      dockerfile: .github/docker/.Dockerfile.tests
+    container_name: cypress-plp
+    command: npx cypress run --spec "cypress/e2e/plp*.cy.js"
+  cypress-pdp:
+    image: cypress-image
+    build:
+      context: ../../
+      dockerfile: .github/docker/.Dockerfile.tests
+    container_name: cypress-pdp
+    command: npx cypress run --spec "cypress/e2e/pdp*.cy.js"

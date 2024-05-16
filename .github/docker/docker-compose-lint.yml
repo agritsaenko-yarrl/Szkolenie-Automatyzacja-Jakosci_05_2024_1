@@ -1,0 +1,8 @@
+services:
+  lint-check:
+    image: cypress-lint-image
+    build:
+      context: ../../
+      dockerfile: .github/docker/.Dockerfile.lint
+    container_name: cypress-lint
+    command: npx eslint ./cypress
