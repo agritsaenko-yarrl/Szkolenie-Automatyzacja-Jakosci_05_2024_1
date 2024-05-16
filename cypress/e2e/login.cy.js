@@ -8,7 +8,6 @@ describe('login', () => {
     cy.get('[data-test="password"]').type('secret_sauce');
 
     cy.get('[data-test="login-button"]').click();
-
     cy.url().should('eq', 'https://www.saucedemo.com/inventory.html');
   });
 
