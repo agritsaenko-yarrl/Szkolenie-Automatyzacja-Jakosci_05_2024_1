@@ -8,7 +8,7 @@ run_cypress_test() {
     local container_id
 
     # Run the container and get its ID
-    if ! container_id=$(docker run -d cypress-image:latest cypress run --spec "$test_file"); then
+    if ! container_id=$(docker run -d cypress-image cypress run --spec "$test_file"); then
         echo "Failed to start container for $test_file"
         return 1
     fi
