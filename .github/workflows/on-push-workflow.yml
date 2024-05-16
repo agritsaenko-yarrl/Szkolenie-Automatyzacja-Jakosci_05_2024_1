@@ -1,0 +1,23 @@
+name: Static lint check
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: .github/docker/docker-compose-lint.yml
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Build docker image from docker compose file
+      run: docker-compose build
+
+    - name: Run lint check inside of the container
+      run: docker-compose up --exit-code-from lint-check

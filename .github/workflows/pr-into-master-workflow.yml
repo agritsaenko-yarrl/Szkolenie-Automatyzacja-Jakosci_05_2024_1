@@ -1,0 +1,40 @@
+name: PR Workflow - Cypress tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-smoke:
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: .github/docker/docker-compose-tests.yml
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Build docker image from docker compose file
+      run: docker-compose build
+
+    - name: Run cypress smoke tests check inside of the container
+      run: docker-compose up --exit-code-from cypress-smoke
+  cypress-tests:
+    runs-on: ubuntu-latest
+    needs: cypress-smoke
+    env:
+      COMPOSE_FILE: .github/docker/docker-compose-tests.yml
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Build docker image from docker compose file
+      run: docker-compose build
+
+    - name: Run cypress plp check inside of the container
+      run: docker-compose up --exit-code-from cypress-plp
+
+    - name: Run cypress pdp check inside of the container
+      run: docker-compose up --exit-code-from cypress-pdp
