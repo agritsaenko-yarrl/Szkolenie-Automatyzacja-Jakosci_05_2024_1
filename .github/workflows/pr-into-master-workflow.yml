@@ -9,7 +9,7 @@ jobs:
   cypress-smoke:
     runs-on: ubuntu-latest
     env:
-      COMPOSE_FILE: .github/docker/docker-compose-tests.yml
+      COMPOSE_FILE: .github/docker/docker-compose-smoke.yml
 
     steps:
     - name: Check out repository
